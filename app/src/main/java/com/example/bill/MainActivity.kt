@@ -33,7 +33,6 @@ class MainActivity : ComponentActivity() {
                         composable("main") {
                             MainScreen(navController = navController)
 
-                            CardMenuScreen()
                         }
                     }
                 }
