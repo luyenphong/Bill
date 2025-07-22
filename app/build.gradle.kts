@@ -37,9 +37,16 @@ android {
     buildFeatures {
         compose = true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10" // hoặc mới hơn tùy phiên bản Compose
+    }
 }
 
 dependencies {
+
+    implementation(libs.ui)
+    implementation(libs.androidx.foundation)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -52,6 +59,11 @@ dependencies {
     implementation(libs.androidx.navigation.compose) // hoặc version mới hơn
     implementation(libs.material3)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    // Các thành phần khác nếu cần
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.compose.bom.v20250700)
+    implementation(libs.androidx.compose.ui.ui)
+    implementation(libs.foundation)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

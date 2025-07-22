@@ -12,12 +12,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun HeaderCard() {
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .height(400.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(400.dp)
     ) {
         Canvas(modifier = Modifier.matchParentSize()) {
             val width = size.width
@@ -51,17 +53,30 @@ fun HeaderCard() {
                 .padding(24.dp)
         ) {
             Text(
-                text = "Good Morning",
+                text = getGreetingMessage(),
                 color = Color.White,
                 style = MaterialTheme.typography.bodyLarge
             )
             Text(
-                text = "Satwik Pachino",
+                text = "Trọng Hiển",
                 color = Color.White,
-                style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp // chỉnh cỡ chữ nhỏ hơn, ví dụ 16sp
+                )
             )
         }
+    }
+}
 
+fun getGreetingMessage(): String {
+    val calendar = java.util.Calendar.getInstance()
+    val hour = calendar.get(java.util.Calendar.HOUR_OF_DAY)
 
+    return when (hour) {
+        in 5..11 -> "Chào buổi sáng 🌅"
+        in 12..16 -> "Chào buổi trưa ☀️"
+        in 17..20 -> "Chào buổi chiều 🌇"
+        else -> "Chào buổi tối 🌙"
     }
 }
