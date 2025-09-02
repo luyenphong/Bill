@@ -31,7 +31,7 @@ fun AppContent(viewModel: MainViewModel) {
                 currentScreen = Screen.CUSTOMER_FORM
             },
             onDeleteCustomer = { customerId ->
-                viewModel.deleteCustomer(customerId) {}
+//                viewModel.deleteCustomer(customerId) {}
             },
             onCustomerSelected = {
                 viewModel.selectCustomer(it)

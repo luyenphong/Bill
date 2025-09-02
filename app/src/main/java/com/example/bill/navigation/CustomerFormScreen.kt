@@ -1,7 +1,6 @@
 package com.example.bill.navigation
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -18,9 +17,9 @@ fun CustomerFormScreen(
     onSaveCustomer: (Customer) -> Unit,
     onCancel: () -> Unit
 ) {
-    var name by remember { mutableStateOf(customer?.name ?: "") }
-    var phone by remember { mutableStateOf(customer?.phone ?: "") }
-    var address by remember { mutableStateOf(customer?.address ?: "") }
+    var name by remember { mutableStateOf(customer?.ten ?: "") }
+    var phone by remember { mutableStateOf(customer?.sodienthoai ?: "") }
+    var address by remember { mutableStateOf(customer?.diachi ?: "") }
 
     Column(
         modifier = Modifier
@@ -64,8 +63,8 @@ fun CustomerFormScreen(
 
         Row {
             Button(onClick = {
-                val newCustomer = customer?.copy(name = name, phone = phone, address = address)
-                    ?: Customer(name = name, phone = phone, address = address)
+                val newCustomer = customer?.copy(ten = name, sodienthoai = phone, diachi = address)
+                    ?: Customer(ten = name, sodienthoai = phone, diachi = address)
                 onSaveCustomer(newCustomer)
             }) {
                 Text("Lưu")

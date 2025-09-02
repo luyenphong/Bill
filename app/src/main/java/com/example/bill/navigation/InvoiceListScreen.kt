@@ -30,7 +30,7 @@ fun InvoiceListScreen(
     ) {
         // Tiêu đề tự làm
         Text(
-            text = "Hóa đơn của: ${customer.name}",
+            text = "Hóa đơn của: ${customer.ten}",
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(bottom = 16.dp)
         )

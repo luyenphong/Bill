@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class FirebaseRepository {
     private val db = FirebaseFirestore.getInstance()
-    private val customersRef = db.collection("customers")
+    private val customersRef = db.collection("KhachHang")
     private val invoicesRef = db.collection("invoices")
 
     // CUSTOMER
@@ -16,7 +16,7 @@ class FirebaseRepository {
             if (snapshot != null) {
                 val customers = snapshot.documents.mapNotNull {
                     it.toObject(Customer::class.java)?.copy(id = it.id)
-                }
+                }.sortedBy { it.ten.lowercase() }
                 onResult(customers)
             }
         }

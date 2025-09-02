@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,7 +18,7 @@ import com.example.bill.presentation.MainViewModel
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.foundation.layout.width
-
+import androidx.compose.runtime.LaunchedEffect
 
 
 @Composable
@@ -30,6 +29,7 @@ fun CustomerListScreen(
     onDeleteCustomer: (String) -> Unit,
     onCustomerSelected: (Customer) -> Unit
 ) {
+
     val customers = viewModel.customers
 
     Column(
@@ -53,18 +53,14 @@ fun CustomerListScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (customers.isEmpty()) {
-            Text("Chưa có khách hàng nào.")
-        } else {
-            LazyColumn(modifier = Modifier.weight(1f)) {
-                items(customers) { customer ->
-                    CustomerItem(
-                        customer = customer,
-                        onEdit = { onEditCustomer(customer) },
-                        onDelete = { onDeleteCustomer(customer.id) },
-                        onClick = { onCustomerSelected(customer) }
-                    )
-                }
+        LazyColumn(modifier = Modifier.weight(1f)) {
+            items(customers) { customer ->
+                CustomerItem(
+                    customer = customer,
+                    onEdit = { onEditCustomer(customer) },
+                    onDelete = { onDeleteCustomer(customer.id) },
+                    onClick = { onCustomerSelected(customer) }
+                )
             }
         }
     }
@@ -82,8 +78,8 @@ fun CustomerItem(
             .fillMaxWidth()
             .padding(vertical = 8.dp)
     ) {
-        Text(text = "Tên: ${customer.name}")
-        Text(text = "Email: ${customer.address}")
+        Text(text = "Tên: ${customer.ten}")
+        Text(text = "Email: ${customer.diachi}")
 
         Spacer(modifier = Modifier.height(4.dp))
 

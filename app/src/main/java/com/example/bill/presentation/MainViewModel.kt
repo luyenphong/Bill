@@ -14,14 +14,18 @@ class MainViewModel(
     private val invoiceUseCase: InvoiceUseCase
 ) : ViewModel() {
 
-    var customers by mutableStateOf(listOf<Customer>())
-        private set
-
     var selectedCustomer by mutableStateOf<Customer?>(null)
         private set
 
     var invoices by mutableStateOf(listOf<Invoice>())
         private set
+
+    var customers by mutableStateOf<List<Customer>>(emptyList())
+        private set
+
+    init {
+        loadCustomers()
+    }
 
     fun loadCustomers() {
         customerUseCase.getCustomers { list ->
