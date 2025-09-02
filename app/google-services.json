@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "717473267355",
+    "firebase_url": "https://storehanh-f92f9-default-rtdb.firebaseio.com",
+    "project_id": "storehanh-f92f9",
+    "storage_bucket": "storehanh-f92f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717473267355:android:7c233397d2963acea4103e",
+        "android_client_info": {
+          "package_name": "com.example.bill"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuQpVDwhmjaoai-TbVc5NXeuzi2NPE6nE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717473267355:android:2659967cde0308bfa4103e",
+        "android_client_info": {
+          "package_name": "com.example.jetbackbill"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuQpVDwhmjaoai-TbVc5NXeuzi2NPE6nE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717473267355:android:b5d320699633bdffa4103e",
+        "android_client_info": {
+          "package_name": "com.example.luckymoney"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuQpVDwhmjaoai-TbVc5NXeuzi2NPE6nE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
