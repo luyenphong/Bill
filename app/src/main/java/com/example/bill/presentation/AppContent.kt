@@ -55,8 +55,8 @@ fun AppContent(viewModel: MainViewModel) {
             val customer = viewModel.selectedCustomer
             if (customer != null) {
                 InvoiceListScreen (
+                    viewModel = viewModel,
                     customer = customer,
-                    invoices = viewModel.invoices,
                     onAddInvoice = {
                         editingInvoice = null
                         currentScreen = Screen.INVOICE_FORM
@@ -84,7 +84,7 @@ fun AppContent(viewModel: MainViewModel) {
                     customer = customer,
                     invoice = invoice,
                     onSaveInvoice = { invoiceToSave ->
-                        if (invoiceToSave.id.isEmpty()) {
+                        if ((invoiceToSave.maHD?:"").isEmpty()) {
                             viewModel.addInvoice(invoiceToSave) { currentScreen = Screen.INVOICE_LIST }
                         } else {
                             viewModel.updateInvoice(invoiceToSave) { currentScreen = Screen.INVOICE_LIST }

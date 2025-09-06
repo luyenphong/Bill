@@ -1,14 +1,16 @@
 package com.example.bill.data
 
+import android.util.Log
 import com.example.bill.domain.model.Customer
 import com.example.bill.domain.model.Invoice
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.logging.Logger
 
 
 class FirebaseRepository {
     private val db = FirebaseFirestore.getInstance()
     private val customersRef = db.collection("KhachHang")
-    private val invoicesRef = db.collection("invoices")
+    private val invoicesRef = db.collection("HoaDon")
 
     // CUSTOMER
     fun getCustomers(onResult: (List<Customer>) -> Unit) {
@@ -36,13 +38,13 @@ class FirebaseRepository {
 
     // INVOICE
     fun getInvoicesByCustomer(customerId: String, onResult: (List<Invoice>) -> Unit) {
-        invoicesRef.whereEqualTo("customerId", customerId)
-            .addSnapshotListener { snapshot, _ ->
+        invoicesRef.whereEqualTo("maKH",customerId).addSnapshotListener { snapshot, _ ->
                 if (snapshot != null) {
                     val invoices = snapshot.documents.mapNotNull {
-                        it.toObject(Invoice::class.java)?.copy(id = it.id)
+                        it.toObject(Invoice::class.java)?.copy(maHD = it.id)
                     }
                     onResult(invoices)
+
                 }
             }
     }
@@ -52,10 +54,10 @@ class FirebaseRepository {
     }
 
     fun updateInvoice(invoice: Invoice, onComplete: () -> Unit) {
-        invoicesRef.document(invoice.id).set(invoice).addOnSuccessListener { onComplete() }
+        invoicesRef.document(invoice.maHD?:"").set(invoice).addOnSuccessListener { onComplete() }
     }
 
     fun deleteInvoice(invoiceId: String, onComplete: () -> Unit) {
-        invoicesRef.document(invoiceId).delete().addOnSuccessListener { onComplete() }
+//        invoicesRef.document(invoiceId).delete().addOnSuccessListener { onComplete() }
     }
 }

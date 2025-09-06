@@ -12,17 +12,20 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.*
+import com.example.bill.presentation.MainViewModel
+import com.example.bill.toVietnameseCurrency
 
 
 @Composable
 fun InvoiceListScreen(
+    viewModel: MainViewModel,
     customer: Customer,
-    invoices: List<Invoice>,
     onAddInvoice: () -> Unit,
     onEditInvoice: (Invoice) -> Unit,
     onDeleteInvoice: (String) -> Unit,
     onBack: () -> Unit
 ) {
+    val invoices = viewModel.invoices
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -41,17 +44,13 @@ fun InvoiceListScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (invoices.isEmpty()) {
-            Text("Chưa có hóa đơn nào.")
-        } else {
-            LazyColumn(modifier = Modifier.weight(1f)) {
-                items(invoices) { invoice ->
-                    InvoiceItem(
-                        invoice = invoice,
-                        onEdit = { onEditInvoice(invoice) },
-                        onDelete = { onDeleteInvoice(invoice.id) }
-                    )
-                }
+        LazyColumn(modifier = Modifier.weight(1f)) {
+            items(invoices) { invoice ->
+                InvoiceItem(
+                    invoice = invoice,
+                    onEdit = { onEditInvoice(invoice) },
+                    onDelete = { onDeleteInvoice(invoice.maHD?:"") }
+                )
             }
         }
 
@@ -74,8 +73,8 @@ fun InvoiceItem(
             .fillMaxWidth()
             .padding(vertical = 8.dp)
     ) {
-        Text("Số tiền: ${invoice.amount}")
-        Text("Mô tả: ${invoice.description}")
+        Text("Số tiền: " + "${invoice.totalMoney}".toVietnameseCurrency())
+        Text("${invoice.tenKH} - ${invoice.ngay}")
 
         Row(modifier = Modifier.padding(top = 4.dp)) {
             Button(onClick = onEdit) {

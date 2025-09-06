@@ -30,7 +30,7 @@ fun InvoiceFormScreen(
     onCancel: () -> Unit
 ) {
     var amountText by remember { mutableStateOf(invoice?.amount?.toString() ?: "") }
-    var description by remember { mutableStateOf(invoice?.description ?: "") }
+    var description by remember { mutableStateOf(invoice?.tenKH ?: "") }
 
     Column(
         modifier = Modifier
@@ -60,8 +60,8 @@ fun InvoiceFormScreen(
             Button(onClick = {
                 val amount = amountText.toDoubleOrNull() ?: 0.0
                 if (amount <= 0) return@Button
-                val newInvoice = invoice?.copy(amount = amount, description = description, customerId = customer.id)
-                    ?: Invoice(amount = amount, description = description, customerId = customer.id)
+                val newInvoice = invoice?.copy(amount = amount, tenKH = description, maKH = customer.id)
+                    ?: Invoice(amount = amount, tenKH = description, maKH = customer.id)
                 onSaveInvoice(newInvoice)
             }) {
                 Text("Lưu")

@@ -1,9 +1,10 @@
 package com.example.bill.domain.model
 
 data class Invoice(
-    val id: String = "",
-    val customerId: String = "",
-    val date: Long = System.currentTimeMillis(),
-    val amount: Double = 0.0,
-    val description: String = ""
+    var maHD: String?= null,
+    var maKH: String? = null,
+    var amount: Double? = null,
+    var tenKH: String? = null,
+    var totalMoney: String? = null,
+    var ngay: String? = null,
 )
