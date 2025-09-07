@@ -23,6 +23,7 @@ fun InvoiceListScreen(
     onAddInvoice: () -> Unit,
     onEditInvoice: (Invoice) -> Unit,
     onDeleteInvoice: (String) -> Unit,
+    onViewDetail: (Invoice) -> Unit,  // Thêm callback
     onBack: () -> Unit
 ) {
     val invoices = viewModel.invoices
@@ -49,7 +50,10 @@ fun InvoiceListScreen(
                 InvoiceItem(
                     invoice = invoice,
                     onEdit = { onEditInvoice(invoice) },
-                    onDelete = { onDeleteInvoice(invoice.maHD?:"") }
+                    onDelete = { onDeleteInvoice(invoice.maHD?:"") },
+                    onViewDetail = {
+                        onViewDetail(invoice)
+                    }
                 )
             }
         }
@@ -66,7 +70,8 @@ fun InvoiceListScreen(
 fun InvoiceItem(
     invoice: Invoice,
     onEdit: () -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    onViewDetail: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -83,6 +88,9 @@ fun InvoiceItem(
             Spacer(modifier = Modifier.width(8.dp))
             OutlinedButton(onClick = onDelete) {
                 Text("Xóa")
+            }
+            OutlinedButton(onClick = onViewDetail) {
+                Text("Chi tiết")
             }
         }
     }

@@ -1,4 +1,5 @@
 package com.example.bill.navigation
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,8 +19,10 @@ import com.example.bill.presentation.MainViewModel
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.foundation.layout.width
-import androidx.compose.runtime.LaunchedEffect
-
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun CustomerListScreen(
@@ -78,8 +81,14 @@ fun CustomerItem(
             .fillMaxWidth()
             .padding(vertical = 8.dp)
     ) {
-        Text(text = "Tên: ${customer.ten}")
-        Text(text = "Email: ${customer.diachi}")
+        Text(
+            text = "Tên: ${customer.ten} - ${customer.sodienthoai}", style = TextStyle(
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF1A73E8)
+            )
+        )
+        Text(text = "Địa chỉ: ${customer.diachi}")
 
         Spacer(modifier = Modifier.height(4.dp))
 

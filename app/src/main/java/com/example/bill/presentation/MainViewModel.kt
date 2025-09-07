@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.bill.domain.model.Customer
 import com.example.bill.domain.model.Invoice
+import com.example.bill.domain.model.InvoiceItem
 import com.example.bill.domain.usecase.CustomerUseCase
 import com.example.bill.domain.usecase.InvoiceUseCase
 
@@ -72,4 +73,25 @@ class MainViewModel(
     fun deleteInvoice(invoiceId: String, onComplete: () -> Unit) {
         invoiceUseCase.deleteInvoice(invoiceId, onComplete)
     }
+
+
+    var selectedInvoice by mutableStateOf<Invoice?>(null)
+        private set
+
+    fun selectInvoice(invoice: Invoice) {
+        selectedInvoice = invoice
+    }
+    fun clearSelectedInvoice() {
+        selectedInvoice = null
+    }
+
+    var invoiceDetails by mutableStateOf<List<InvoiceItem>>(emptyList())
+        private set
+
+    fun loadInvoiceDetails(invoiceId: String) {
+        invoiceUseCase.getInvoiceDetails(invoiceId) { list ->
+            invoiceDetails = list
+        }
+    }
+
 }

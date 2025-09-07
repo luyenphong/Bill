@@ -3,6 +3,7 @@ package com.example.bill.data
 import android.util.Log
 import com.example.bill.domain.model.Customer
 import com.example.bill.domain.model.Invoice
+import com.example.bill.domain.model.InvoiceItem
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.logging.Logger
 
@@ -11,6 +12,7 @@ class FirebaseRepository {
     private val db = FirebaseFirestore.getInstance()
     private val customersRef = db.collection("KhachHang")
     private val invoicesRef = db.collection("HoaDon")
+    private val invoiceDetail = db.collection("hoadon_sanpham")
 
     // CUSTOMER
     fun getCustomers(onResult: (List<Customer>) -> Unit) {
@@ -59,5 +61,18 @@ class FirebaseRepository {
 
     fun deleteInvoice(invoiceId: String, onComplete: () -> Unit) {
 //        invoicesRef.document(invoiceId).delete().addOnSuccessListener { onComplete() }
+    }
+
+    fun getInvoiceDetails(invoiceId: String, onResult: (List<InvoiceItem>) -> Unit) {
+        invoiceDetail
+            .whereEqualTo("maHD", invoiceId)
+            .addSnapshotListener { snapshot, _ ->
+                if (snapshot != null) {
+                    val items = snapshot.documents.mapNotNull {
+                        it.toObject(InvoiceItem::class.java)
+                    }
+                    onResult(items)
+                }
+            }
     }
 }

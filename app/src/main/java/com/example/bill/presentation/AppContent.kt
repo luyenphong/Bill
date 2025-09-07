@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import com.example.bill.navigation.CustomerFormScreen
 import com.example.bill.navigation.CustomerListScreen
+import com.example.bill.navigation.InvoiceDetailScreen
 import com.example.bill.navigation.InvoiceFormScreen
 import com.example.bill.navigation.InvoiceListScreen
 
@@ -68,6 +69,11 @@ fun AppContent(viewModel: MainViewModel) {
                     onDeleteInvoice = { invoiceId ->
                         viewModel.deleteInvoice(invoiceId) {}
                     },
+                    onViewDetail = {  invoice ->
+                        viewModel.selectInvoice(invoice)
+                        viewModel.loadInvoiceDetails(invoice.maHD ?: "")
+                        currentScreen = Screen.INVOICE_DETAIL
+                    },
                     onBack = {
                         viewModel.clearSelectedCustomer()
                         currentScreen = Screen.CUSTOMER_LIST
@@ -91,6 +97,19 @@ fun AppContent(viewModel: MainViewModel) {
                         }
                     },
                     onCancel = { currentScreen = Screen.INVOICE_LIST }
+                )
+            }
+        }
+
+        Screen.INVOICE_DETAIL -> {
+            val invoice = viewModel.selectedInvoice
+            if (invoice != null) {
+                InvoiceDetailScreen(
+                    viewModel = viewModel,
+                    onBack = {
+                        viewModel.clearSelectedInvoice()
+                        currentScreen = Screen.INVOICE_LIST
+                    }
                 )
             }
         }
